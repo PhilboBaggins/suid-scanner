@@ -15,7 +15,13 @@ fn scan_path(path: &str) -> std::io::Result<()> {
     for e in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
         if e.metadata()?.is_file() {
             let meta = fs::metadata(e.path())?;
-            println!("{:o} {}", meta.mode(), e.path().display());
+            let mode = meta.mode();
+            match mode & 0o006000 {
+                0o006000 => println!("{:o} ug {}", mode, e.path().display()),
+                0o004000 => println!("{:o} u  {}", mode, e.path().display()),
+                0o002000 => println!("{:o}  g {}", mode, e.path().display()),
+                _ => { },
+            }
         }
     }
 
