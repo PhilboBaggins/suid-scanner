@@ -5,6 +5,6 @@ authors = ["Phil <PhilboBaggins@users.noreply.github.com>"]
 edition = "2018"
 
 [dependencies]
-walkdir = "2.2.8"
+walkdir = "2.2.9"
 clap = "2.33.0"
 exitcode = "1.1.2"
